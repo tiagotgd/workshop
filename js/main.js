@@ -1,15 +1,14 @@
 var app = {
-		
-	showAlert: function (message, title) {
+
+    showAlert: function (message, title) {
         if (navigator.notification) {
             navigator.notification.alert(message, null, title, 'OK');
         } else {
             alert(title ? (title + ": " + message) : message);
         }
     },
-    
+
     registerEvents: function() {
-        var self = this;
         $(window).on('hashchange', $.proxy(this.route, this));
         $('body').on('mousedown', 'a', function(event) {
             $(event.target).addClass('tappable-active');
@@ -18,7 +17,7 @@ var app = {
             $(event.target).removeClass('tappable-active');
         });
     },
-    
+
     route: function() {
         var hash = window.location.hash;
         if (!hash) {
@@ -32,14 +31,14 @@ var app = {
             });
         }
     },
-    
+
     initialize: function() {
-    	var self = this;
-	    this.detailsURL = /^#employees\/(\d{1,})/;
-	    this.registerEvents();
-	    this.store = new MemoryStore(function() {
-	    self.route();
-	});
+        var self = this;
+        this.detailsURL = /^#employees\/(\d{1,})/;
+        this.registerEvents();
+        this.store = new MemoryStore(function() {
+            self.route();
+        });
     }
 
 };
